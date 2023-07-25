@@ -71,7 +71,7 @@ def form_staff(request):
             miembrostaff = Staff(   nombre=informacion['nombre'],
                                     sector=informacion['sector'],
                                     telefono=informacion['telefono'])
-            
+            miembrostaff.save()
             
             # Mensaje de éxito
             messages.success(request, f'Se ha guardado el miembro "{miembrostaff.nombre}" correctamente.')
