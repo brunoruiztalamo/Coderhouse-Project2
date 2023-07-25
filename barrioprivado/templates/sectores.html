@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contenido %}
+    <h2>Sectores y Trabajadores</h2>
+    <ul>
+        {% for item in sectores_con_trabajadores %}
+            <li>
+                <strong>{{ item.sector.nombre }}</strong>
+                <ul>
+                    {% for trabajador in item.trabajadores %}
+                        <li>{{ trabajador.nombre }} - {{ trabajador.telefono }}</li>
+                    {% empty %}
+                        <li>No hay trabajadores asociados a este sector.</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock contenido %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% if formularioStaff.errors %}
+
+<p style="color: red;">Por favor, revisar los datos.</p>
+
+{% endif %}
+
+{% block contenido %}
+    <h2>Ingrese el/la miembro del Staff y seleccione su Categoria</h2>
+    <form action="" method="POST">{% csrf_token %}
+
+        <table>
+
+
+            {{ formulario3.as_table }}
+
+
+        </table>
+
+
+        <input type="submit", value="enviar">
+
+    </form>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+{% endblock contenido %}
