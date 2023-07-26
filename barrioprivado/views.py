@@ -3,7 +3,14 @@ from .forms import formularioResidente, formularioInvitado, formularioStaff
 from .models import Residente, Sector, Staff, Invitado
 from django.contrib import messages
 
-
+def inicio(request):
+    contexto = {}
+    http_response = render(
+        request=request,
+        template_name='base.html',
+        context=contexto,
+    )
+    return http_response
 
 def form_residentes(request):
     if request.method == 'POST':
@@ -29,9 +36,9 @@ def form_residentes(request):
             return redirect('formularioResidentes')
             
     else:
-        formulario = formularioResidente()
+        formulario1 = formularioResidente()
         
-    return render(request, 'residentes.html', {'formulario1': formulario})
+    return render(request, 'residentes.html', {'formulario1': formulario1})
 
 
 
@@ -49,7 +56,7 @@ def form_invitado(request):
             invitado.save()
            
            # Mensaje de éxito 
-            messages.success(request, f'Se ha guardado el invitado "{invitado.nombre}" correctamente. Residente: {Residente.nombre}')
+            messages.success(request, f'Se ha guardado el invitado "{invitado.apellido}, {invitado.nombre}" correctamente. {invitado.residente}')
             
             
                 # Redireccionar a la misma página para evitar reenvío del formulario
@@ -95,3 +102,22 @@ def mostrar_sectores(request):
         sectores_con_trabajadores.append({'sector': sector, 'trabajadores': trabajadores})
 
     return render(request, 'sectores.html', {'sectores_con_trabajadores': sectores_con_trabajadores})
+
+
+def busqueda_resultados(request):
+    if request.method == 'POST':
+        palabra_clave = request.POST.get('palabra_clave', '')
+
+        # Realizar las consultas para obtener los resultados de la búsqueda
+        resultados_residentes = Residente.objects.filter(nombre__icontains=palabra_clave)
+        resultados_sectores = Sector.objects.filter(nombre__icontains=palabra_clave)
+        resultados_staff = Staff.objects.filter(nombre__icontains=palabra_clave)
+
+        return render(request, 'busqueda_resultados.html', {
+            'palabra_clave': palabra_clave,
+            'resultados_residentes': resultados_residentes,
+            'resultados_sectores': resultados_sectores,
+            'resultados_staff': resultados_staff,
+        })
+    else:
+        return render(request, 'busqueda_resultados.html')

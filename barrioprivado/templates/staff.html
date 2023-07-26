@@ -1,15 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
-
-
 {% if formularioStaff.errors %}
-
-<p style="color: red;">Por favor, revisar los datos.</p>
-
+<p style="color: red; text-align: left;">Por favor, revisar los datos.</p>
 {% endif %}
-
 {% block contenido %}
-    <h2>Ingrese el/la miembro del Staff y seleccione su Categoria</h2>
+    <h2 style="color: white; text-align: left;">Ingrese miembro del Staff y Categoria</h2>
     <form action="" method="POST">{% csrf_token %}
 
         <table>
@@ -25,11 +20,10 @@
 
     </form>
     {% if messages %}
-    <ul class="messages">
+    <ul class="messages" style="color: white;">
         {% for message in messages %}
-            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        <li  style="color: white; text-align: left;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
         {% endfor %}
     </ul>
     {% endif %}
-
 {% endblock contenido %}

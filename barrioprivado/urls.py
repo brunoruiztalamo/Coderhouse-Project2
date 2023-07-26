@@ -16,10 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .views import form_residentes, form_invitado, form_staff, mostrar_sectores
+from .views import inicio, form_residentes, form_invitado, form_staff, mostrar_sectores, busqueda_resultados
 urlpatterns = [
+    path('', inicio, name="inicio"),
     path('formularioResidentes/', form_residentes, name="formularioResidentes"),
     path('formularioInvitado/', form_invitado, name="formularioInvitado"),
     path('formularioStaff/', form_staff, name="formularioStaff"),
-    path('mostrarSectores/', mostrar_sectores, name="mostrarSectores")
+    path('mostrarSectores/', mostrar_sectores, name="mostrarSectores"),
+    path('busquedaResultados/', busqueda_resultados, name='busquedaResultados'),
+
 ]

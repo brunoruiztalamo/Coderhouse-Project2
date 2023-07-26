@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contenido %}
+    <section>
+    <h2 style="color: white; text-align: left;">Buscar por Palabra Clave</h2>
+    <form action="" method="post">
+        {% csrf_token %}
+        <label for="palabra_clave">Palabra Clave:</label>
+        <input type="text" name="palabra_clave" id="palabra_clave">
+        <input type="submit" value="Buscar">
+    </form>
+    </section>
+    {% if palabra_clave %}
+        {% if resultados_residentes %}
+            <h3 style="color: white;">Residentes:</h3>
+            <ul>
+                {% for residente in resultados_residentes %}
+                    <li style="color: white;">Nombre Completo: {{ residente.nombre }} - Direccion: {{ residente.direccion }} - Telefono: {{ residente.telefono }}</li>
+                {% empty %}
+                    <li style="color: white;">No se encontraron residentes con la palabra clave.</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if resultados_staff %}
+            <h3 style="color: white;">Staff:</h3>
+            <ul>
+                {% for miembro in resultados_staff %}
+                    <li style="color: white;">Nombre Completo:{{ miembro.nombre }} - Sector: {{ miembro.sector }} - Telefono: {{ miembro.telefono }}</li>
+                {% empty %}
+                    <li style="color: white;">No se encontró personal de staff con la palabra clave.</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if resultados_sectores %}
+            <h3 style="color: white;">Sectores:</h3>
+            <ul>
+                {% for sector in resultados_sectores %}
+                    <li style="color: white;">Sector: {{ sector.nombre }} - Cod.Sector: {{ sector.codigo }}</li>
+                {% empty %}
+                    <li style="color: white;">No se encontraron sectores con la palabra clave.</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if resultados_invitados %}
+            <h3 style="color: white;">Invitados:</h3>
+            <ul>
+                {% for invitado in resultados_invitados %}
+                    <li style="color: white;">{{ invitado.nombre }} {{ invitado.apellido }}</li>
+                {% empty %}
+                    <li style="color: white;">No se encontraron invitados con la palabra clave.</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endif %}
+{% endblock contenido %}

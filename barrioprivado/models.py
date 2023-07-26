@@ -25,7 +25,7 @@ class Residente(models.Model):
     
     
 class Invitado(models.Model):
-    residente = models.OneToOneField(Residente, on_delete=models.CASCADE, verbose_name="Nombre del Inquilino", default=None)
+    residente = models.ForeignKey(Residente, on_delete=models.CASCADE, verbose_name="Nombre del Inquilino", default=None)
     nombre = models.CharField(max_length=20, blank=True, verbose_name="Nombre y Apellido")
     apellido = models.CharField(max_length=50, blank=True)
     telefono = models.PositiveBigIntegerField(blank=True)

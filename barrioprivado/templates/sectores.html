@@ -1,17 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block contenido %}
-    <h2>Sectores y Trabajadores</h2>
-    <ul>
+    <h2 style="color: white; text-align: left;">Sectores y Trabajadores</h2>
+    <ul style="list-style-type: none; color:white;">
         {% for item in sectores_con_trabajadores %}
             <li>
-                <strong>{{ item.sector.nombre }}</strong>
-                <ul>
+                <strong  style="color: white; text-align: left;">{{ item.sector.nombre }}</strong>
+                <ul style="list-style-type: none; color:white;">
                     {% for trabajador in item.trabajadores %}
-                        <li>{{ trabajador.nombre }} - {{ trabajador.telefono }}</li>
+                        <li style="color: white; text-align: left;">{{ trabajador.nombre }} - {{ trabajador.telefono }}</li>
                     {% empty %}
-                        <li>No hay trabajadores asociados a este sector.</li>
+                        <li style="color: white; text-align: left;">No hay trabajadores asociados a este sector.</li>
                     {% endfor %}
                 </ul>
             </li>
